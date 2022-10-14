@@ -1,0 +1,15 @@
+{
+  "name": "projetos-barbearia-alura",
+  "version": "1.0.0",
+  "description": "Barbearia Alura",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "test": "npx run test"
+  },
+  "author": "Leonardo Luz",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^10.10.0"
+  }
+}
