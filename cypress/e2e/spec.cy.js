@@ -4,8 +4,6 @@ describe('Barbearia Alura', () => {
     // Dado que ao acessar o link
     cy.visit('./../../src/index.html')
   })
-
-
   it('Visitando links ancora da pagina inicial', () => {    
     cy.contains('a', 'Home')       
       .should('be.visible')
