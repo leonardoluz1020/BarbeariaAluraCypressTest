@@ -21,11 +21,21 @@ describe('Barbearia Alura', () => {
       .title()
       .should('be.equal', 'Contato - Barbearia Alura')
   })
+  it('Sobre a Barbearia Alura', () => {
+    cy.contains('h2','Sobre a Barbearia Alura')
+    .should('be.visible')
+    cy.contains('p','Localizada no coração da cidade a ')
+    .should('be.visible')
+    cy.contains('strong','Barbearia Alura')
+    .should('be.visible')
+    cy.contains('p','traz para o mercado o que há de melhor para o seu cabelo e barba. Fundada em 2019, a Barbearia Alura já é destaque na cidade e conquista novos clientes a cada dia.')
+    .should('be.visible')
+  })
   it('Verificando area do local do mapa', () => {
     cy.contains('p', 'Nosso estabelecimento está localizado no coração da cidade')
       .should('be.visible')
   })
-  it.only('Verificando beneficios', () => {
+  it('Verificando beneficios', () => {
     cy.contains('.lista-beneficios', 'Atendimentos aos clientes')
       .should('be.visible')
     cy.contains('.lista-beneficios', 'Espaço diferenciado')
