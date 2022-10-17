@@ -32,6 +32,8 @@ describe('Barbearia Alura', () => {
     .should('be.visible')
   })
   it('Verificando area do local do mapa', () => {
+
+    cy.get('.mapa-conteudo>iframe').should('be.visible')
     cy.contains('p', 'Nosso estabelecimento está localizado no coração da cidade')
       .should('be.visible')
   })
@@ -49,6 +51,9 @@ describe('Barbearia Alura', () => {
     cy.contains('.lista-beneficios', 'Limpeza')
       .should('be.visible')
 
+  })
+  it('Verificando video da pagina inicial',()=>{
+    cy.get('.video>iframe').should('be.visible')        
   })
 
 })
