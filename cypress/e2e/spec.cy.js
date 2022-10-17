@@ -55,7 +55,7 @@ describe('Barbearia Alura', () => {
   it('Verificando video da pagina inicial', () => {
     cy.get('.video>iframe').should('be.visible')
   })
-  it('Verificando acesso ao link do Youtube', () => {
+  it('Fazendo uma requisição ao http', () => {
     cy.request('https://www.youtube.com/watch?v=ILfdTXgV_Yk')
       // com request podemos fazer requisição a nivel de rede
       .should(function (response) { // usando o should para fazer verificações junto com uma função de callback que recebe a resposta da requisição, 
@@ -64,7 +64,7 @@ describe('Barbearia Alura', () => {
 
       })
   })
-  it('Verificando acesso ao link do Youtube method POST', () => {
+  it('Fazendo requisição usando method Post', () => {
     cy.request({
       method: 'POST',
       url: 'https://www.youtube.com/youtubei/v1/log_event?alt=json&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
@@ -73,7 +73,6 @@ describe('Barbearia Alura', () => {
       expect(res.statusText).to.be.equal("OK")
       expect(res.body).is.not.empty
       expect(res.isOkStatusCode).to.be.equal(true)
-
     })
   })
 
