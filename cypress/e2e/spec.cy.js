@@ -22,14 +22,14 @@ describe('Barbearia Alura', () => {
       .should('be.equal', 'Contato - Barbearia Alura')
   })
   it('Sobre a Barbearia Alura', () => {
-    cy.contains('h2','Sobre a Barbearia Alura')
-    .should('be.visible')
-    cy.contains('p','Localizada no coração da cidade a ')
-    .should('be.visible')
-    cy.contains('strong','Barbearia Alura')
-    .should('be.visible')
-    cy.contains('p','traz para o mercado o que há de melhor para o seu cabelo e barba. Fundada em 2019, a Barbearia Alura já é destaque na cidade e conquista novos clientes a cada dia.')
-    .should('be.visible')
+    cy.contains('h2', 'Sobre a Barbearia Alura')
+      .should('be.visible')
+    cy.contains('p', 'Localizada no coração da cidade a ')
+      .should('be.visible')
+    cy.contains('strong', 'Barbearia Alura')
+      .should('be.visible')
+    cy.contains('p', 'traz para o mercado o que há de melhor para o seu cabelo e barba. Fundada em 2019, a Barbearia Alura já é destaque na cidade e conquista novos clientes a cada dia.')
+      .should('be.visible')
   })
   it('Verificando area do local do mapa', () => {
 
@@ -52,8 +52,29 @@ describe('Barbearia Alura', () => {
       .should('be.visible')
 
   })
-  it('Verificando video da pagina inicial',()=>{
-    cy.get('.video>iframe').should('be.visible')        
+  it('Verificando video da pagina inicial', () => {
+    cy.get('.video>iframe').should('be.visible')
+  })
+  it('Verificando acesso ao link do Youtube', () => {
+    cy.request('https://www.youtube.com/watch?v=ILfdTXgV_Yk')
+      // com request podemos fazer requisição a nivel de rede
+      .should(function (response) { // usando o should para fazer verificações junto com uma função de callback que recebe a resposta da requisição, 
+        const { status, } = response // com a resposta da requisição estamos desestruturando o status
+        expect(status).to.equal(200) // com o expect verifica no status se é igual a 200
+
+      })
+  })
+  it('Verificando acesso ao link do Youtube method POST', () => {
+    cy.request({
+      method: 'POST',
+      url: 'https://www.youtube.com/youtubei/v1/log_event?alt=json&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8'
+    }).then((res) => {
+      expect(res.status).to.be.equal(200)
+      expect(res.statusText).to.be.equal("OK")
+      expect(res.body).is.not.empty
+      expect(res.isOkStatusCode).to.be.equal(true)
+
+    })
   })
 
 })
