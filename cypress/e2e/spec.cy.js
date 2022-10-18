@@ -75,5 +75,26 @@ describe('Barbearia Alura', () => {
       expect(res.isOkStatusCode).to.be.equal(true)
     })
   })
+  it('Verificando preço da pagina de produtos',()=> {
+    cy.contains('a', 'Produtos') // visita pagina de produtos
+    .should('be.visible')
+    .click()
+    .title()
+    .should('be.equal', 'Produtos - Barbearia Alura')
+    cy.contains('.produto-preco','R$ 25,00').should('be.visible')
+    cy.contains('.produto-preco','R$ 18,00').should('be.visible')
+    cy.contains('.produto-preco','R$ 35,00').should('be.visible')    
+  })
+  
+  it('Verificando titulos da pagina de produtos',()=> {
+    cy.contains('a', 'Produtos') // visita pagina de produtos
+    .should('be.visible')
+    .click()
+    .title()
+    .should('be.equal', 'Produtos - Barbearia Alura')
+    cy.contains('h2','Cabelo').should('be.visible')
+    cy.contains('h2','Barba').should('be.visible')
+    cy.contains('h2','Cabelo + Barba').should('be.visible')    
+  })
 
 })
