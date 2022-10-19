@@ -105,14 +105,27 @@ describe('Barbearia Alura', () => {
       .click()
       .title()
       .should('be.equal', 'Contato - Barbearia Alura')
-      cy.get('#nomesobrenome').type('Leonardo Oliveira').should('have.value','Leonardo Oliveira')
-      cy.get('#email').type('leonardoluz@email.com').should('have.value','leonardoluz@email.com')
-      cy.get('#telefone').type('11945587569').should('have.value','11945587569')
-      cy.get('#mensagem').should('be.visible').type(testLong,{delay:0})
-      cy.get('input[type="radio"][value="email"]') // identificando o elemento input
+    cy.get('#nomesobrenome').type('Leonardo Oliveira').should('have.value', 'Leonardo Oliveira')
+    cy.get('#email').type('leonardoluz@email.com').should('have.value', 'leonardoluz@email.com')
+    cy.get('#telefone').type('11945587569').should('have.value', '11945587569')
+    cy.get('#mensagem').should('be.visible').type(testLong, { delay: 0 })
+    cy.get('input[type="radio"][value="email"]') // identificando o elemento input
       .check() // encadeou o check para marcar o radio button ou seja da check no feedback
       .should('have.value', 'email')
-      cy.contains('.enviar', 'Enviar formulário').click();
-      
+    cy.contains('.enviar', 'Enviar formulário').click();
+
   })
+  it('preenche a area de texto usando o comando invoke', () => {
+     // constante recebe             valor x 60  ele mesmo
+    const longText = Cypress._.repeat('0123456789', 60); //Usando o repeat para criar um texto longo
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')       
+    cy.get('#mensagem')// acessando o text-area
+      .invoke('val', longText)// usando o invoke para colocar o valor da constante longText
+      .should('have.value', longText);// verificando se o texto está com mesmo valor
+  })
+
 })
