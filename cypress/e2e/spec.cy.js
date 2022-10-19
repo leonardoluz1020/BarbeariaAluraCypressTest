@@ -116,16 +116,29 @@ describe('Barbearia Alura', () => {
 
   })
   it('preenche a area de texto usando o comando invoke', () => {
-     // constante recebe             valor x 60  ele mesmo
+    // constante recebe             valor x 60  ele mesmo
     const longText = Cypress._.repeat('0123456789', 60); //Usando o repeat para criar um texto longo
     cy.contains('a', 'Contato') // visita pagina de contato
       .should('be.visible')
       .click()
       .title()
-      .should('be.equal', 'Contato - Barbearia Alura')       
+      .should('be.equal', 'Contato - Barbearia Alura')
     cy.get('#mensagem')// acessando o text-area
       .invoke('val', longText)// usando o invoke para colocar o valor da constante longText
       .should('have.value', longText);// verificando se o texto está com mesmo valor
+  })
+  it('marca ambos checkboxes, depois desmarca o último', () => {
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.get('input[type="checkbox"]') // com o cy.get para pegar os elementos do input type checkbox
+      .check() // marca o elemento com um check
+      .should('be.checked') // verifica se está marcado o elemento
+      //.last() //vai para o ultimo elemento da lista de checkbox
+      .uncheck() // desmarca o ultimo elemento devido esta está listado com .last
+      .should('not.be.checked'); // verifica se não está marcado
   })
 
 })
