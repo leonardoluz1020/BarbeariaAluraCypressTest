@@ -140,5 +140,22 @@ describe('Barbearia Alura', () => {
       .uncheck() // desmarca o ultimo elemento devido esta está listado com .last
       .should('not.be.checked'); // verifica se não está marcado
   })
+  it('marca cada tipo de contato', () => {
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.get('input[type="radio"]') // usando o input para verificar a quantidade de elemento de do type="radio"
+
+      .should('have.length', 3) // verificando e confirmando a quantidade de elementos 
+
+      .each(function ($radio) { // usando a função .each para passar em cada um dos elementos 
+
+        cy.wrap($radio).check(); // com o comando cy.wrap empacotamos o elemento para mandar comandos de testes ex .should .check
+
+        cy.wrap($radio).should('be.checked'); // com o .should no wrap $radio se verifica se esta checado o radio.
+      })
+  })
 
 })
