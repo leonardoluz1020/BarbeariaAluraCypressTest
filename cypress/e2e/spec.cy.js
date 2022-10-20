@@ -166,6 +166,20 @@ describe('Barbearia Alura', () => {
     cy.get('#mensagem').should('be.visible')
 
   })
+  it('preenchendo os campos obrigatórios do formulário',()=>{
+    cy.contains('a','Contato')
+    .should('be.visible')
+    .click()
+    .title()
+    .should('be.equal','Contato - Barbearia Alura')
+    cy.get('#nomesobrenome').type('Leonardo Oliveira da Luz',{delay:0}).should('have.value','Leonardo Oliveira da Luz')
+    cy.get('#email').type('leonardo@email.com').should('have.value','leonardo@email.com')
+    cy.get('#telefone').type('11985859696').should('have.value','11985859696')
+    cy.get('#mensagem').type(longText,{delay:0}).should('have.value',longText)
+    cy.get('#radio-email').check().should('be.checked')
+    cy.get('.enviar').click()
+    cy.get('#nomesobrenome').should('have.value','')
+  })
   it('preenche a area de texto usando o comando invoke', () => {
     cy.contains('a', 'Contato') // visita pagina de contato
       .should('be.visible')
@@ -176,7 +190,7 @@ describe('Barbearia Alura', () => {
       .invoke('val', longText)// usando o invoke para colocar o valor da constante longText
       .should('have.value', longText);// verificando se o texto está com mesmo valor
   })
-  it('marca ambos checkboxes, depois desmarca o último', () => {
+  it('marcar ambos checkboxes, depois desmarca o último', () => {
     cy.contains('a', 'Contato') // visita pagina de contato
       .should('be.visible')
       .click()
@@ -185,24 +199,19 @@ describe('Barbearia Alura', () => {
     cy.get('input[type="checkbox"]') // com o cy.get para pegar os elementos do input type checkbox
       .check() // marca o elemento com um check
       .should('be.checked') // verifica se está marcado o elemento
-      //.last() //vai para o ultimo elemento da lista de checkbox
-      .uncheck() // desmarca o ultimo elemento devido esta está listado com .last
+      .uncheck() // desmarca o checkbox
       .should('not.be.checked'); // verifica se não está marcado
   })
-  it('marca cada tipo de contato', () => {
+  it('marcar cada tipo de contato', () => {
     cy.contains('a', 'Contato') // visita pagina de contato
       .should('be.visible')
       .click()
       .title()
       .should('be.equal', 'Contato - Barbearia Alura')
     cy.get('input[type="radio"]') // usando o input para verificar a quantidade de elemento de do type="radio"
-
       .should('have.length', 3) // verificando e confirmando a quantidade de elementos 
-
-      .each(function ($radio) { // usando a função .each para passar em cada um dos elementos 
-
+      .each(function ($radio) { // usando a função .each para passar em cada um dos elementos
         cy.wrap($radio).check(); // com o comando cy.wrap empacotamos o elemento para mandar comandos de testes ex .should .check
-
         cy.wrap($radio).should('be.checked'); // com o .should no wrap $radio se verifica se esta checado o radio.
       })
   })
