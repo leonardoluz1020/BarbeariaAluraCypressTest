@@ -1,7 +1,7 @@
 describe('Barbearia Alura', () => {
-
+  //Usando o repeat para criar um texto longo
+  const longText = Cypress._.repeat('0123456789', 60);
   beforeEach(() => {
-    // Dado que ao acessar o link
     cy.visit('./../../src/index.html')
   })
   it('Visitando links ancora da pagina inicial', () => {
@@ -98,8 +98,58 @@ describe('Barbearia Alura', () => {
     cy.contains('h2', 'Barba').should('be.visible')
     cy.contains('h2', 'Cabelo + Barba').should('be.visible')
   })
-  it('preenche os campos obrigatórios e envia o formulário', () => {
-    const testLong = 'Precisamos aprender Cypress URGENTE para entrarmos na area de analista de teste automatizado Precisamos aprender Cypress URGENTE para entrarmos na area de analista de teste automatizado Precisamos aprender Cypress URGENTE para entrarmos na area de analista de teste automatizado Precisamos aprender Cypress URGENTE para entrarmos na area de analista de teste automatizado'; // variavel com texto
+  it('preenche os campos obrigatórios sem o nome e enviar o formulário', () => {
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.get('#nomesobrenome').should('have.value', '')
+    cy.get('#email').type('leonardoluz@email.com').should('have.value', 'leonardoluz@email.com')
+    cy.get('#telefone').type('11945587569').should('have.value', '11945587569')
+    cy.get('#mensagem').should('be.visible').type(longText, { delay: 0 })
+    cy.get('input[type="radio"][value="email"]') // identificando o elemento input
+      .check() // encadeou o check para marcar o radio button ou seja da check no feedback
+      .should('have.value', 'email')
+    cy.contains('.enviar', 'Enviar formulário').click();
+    cy.get('#nomesobrenome').should('have.value', '')
+
+  })
+  it('preenche os campos obrigatórios sem o email e enviar o formulário', () => {
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.get('#nomesobrenome').type('Leonardo Oliveira').should('have.value', 'Leonardo Oliveira')
+    cy.get('#email').should('have.value', '')
+    cy.get('#telefone').type('11945587569').should('have.value', '11945587569')
+    cy.get('#mensagem').should('be.visible').type(longText, { delay: 0 })
+    cy.get('input[type="radio"][value="email"]') // identificando o elemento input
+      .check() // encadeou o check para marcar o radio button ou seja da check no feedback
+      .should('have.value', 'email')
+    cy.contains('.enviar', 'Enviar formulário').click();
+    cy.get('#email').should('have.value', '')
+
+  })
+  it('preenche os campos obrigatórios sem o telefone e enviar o formulário', () => {
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.get('#nomesobrenome').type('Leonardo Oliveira').should('have.value', 'Leonardo Oliveira')
+    cy.get('#email').type('leonardoluz@email.com').should('have.value', 'leonardoluz@email.com')
+    cy.get('#telefone').should('have.value', '')
+    cy.get('#mensagem').should('be.visible').type(longText, { delay: 0 })
+    cy.get('input[type="radio"][value="email"]') // identificando o elemento input
+      .check() // encadeou o check para marcar o radio button ou seja da check no feedback
+      .should('have.value', 'email')
+    cy.contains('.enviar', 'Enviar formulário').click();
+    cy.get('#telefone').should('have.value', '')
+
+  })
+  it('preenche os campos obrigatórios sem texto e enviar o formulário', () => {
     cy.contains('a', 'Contato') // visita pagina de contato
       .should('be.visible')
       .click()
@@ -108,16 +158,15 @@ describe('Barbearia Alura', () => {
     cy.get('#nomesobrenome').type('Leonardo Oliveira').should('have.value', 'Leonardo Oliveira')
     cy.get('#email').type('leonardoluz@email.com').should('have.value', 'leonardoluz@email.com')
     cy.get('#telefone').type('11945587569').should('have.value', '11945587569')
-    cy.get('#mensagem').should('be.visible').type(testLong, { delay: 0 })
+    cy.get('#mensagem').should('be.visible')
     cy.get('input[type="radio"][value="email"]') // identificando o elemento input
       .check() // encadeou o check para marcar o radio button ou seja da check no feedback
       .should('have.value', 'email')
     cy.contains('.enviar', 'Enviar formulário').click();
+    cy.get('#mensagem').should('be.visible')
 
   })
   it('preenche a area de texto usando o comando invoke', () => {
-    // constante recebe             valor x 60  ele mesmo
-    const longText = Cypress._.repeat('0123456789', 60); //Usando o repeat para criar um texto longo
     cy.contains('a', 'Contato') // visita pagina de contato
       .should('be.visible')
       .click()
