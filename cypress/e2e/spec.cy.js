@@ -157,5 +157,34 @@ describe('Barbearia Alura', () => {
         cy.wrap($radio).should('be.checked'); // com o .should no wrap $radio se verifica se esta checado o radio.
       })
   })
-
+  it('selecionar o perido da manha a ser atendido por seu texto', () => {
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.get('#horario')
+      .select('manha')
+      .should('have.value', 'manha')
+  })
+  it('selecionar o perido da tarde a ser atendido por seu texto', () => {
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.get('#horario')
+      .select('tarde')
+      .should('have.value', 'tarde')
+  })
+  it('selecionar o perido da noite a ser atendido por seu texto', () => {
+    cy.contains('a', 'Contato') // visita pagina de contato
+      .should('be.visible')
+      .click()
+      .title()
+      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.get('#horario')
+      .select('noite')
+      .should('have.value', 'noite')
+  })
 })
