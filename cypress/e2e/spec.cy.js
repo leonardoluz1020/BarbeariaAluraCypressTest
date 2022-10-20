@@ -99,11 +99,7 @@ describe('Barbearia Alura', () => {
     cy.contains('h2', 'Cabelo + Barba').should('be.visible')
   })
   it('preenche os campos obrigatórios sem o nome e enviar o formulário', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#nomesobrenome').should('have.value', '')
     cy.get('#email').type('leonardoluz@email.com').should('have.value', 'leonardoluz@email.com')
     cy.get('#telefone').type('11945587569').should('have.value', '11945587569')
@@ -116,11 +112,7 @@ describe('Barbearia Alura', () => {
 
   })
   it('preenche os campos obrigatórios sem o email e enviar o formulário', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#nomesobrenome').type('Leonardo Oliveira').should('have.value', 'Leonardo Oliveira')
     cy.get('#email').should('have.value', '')
     cy.get('#telefone').type('11945587569').should('have.value', '11945587569')
@@ -133,11 +125,7 @@ describe('Barbearia Alura', () => {
 
   })
   it('preenche os campos obrigatórios sem o telefone e enviar o formulário', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#nomesobrenome').type('Leonardo Oliveira').should('have.value', 'Leonardo Oliveira')
     cy.get('#email').type('leonardoluz@email.com').should('have.value', 'leonardoluz@email.com')
     cy.get('#telefone').should('have.value', '')
@@ -150,11 +138,7 @@ describe('Barbearia Alura', () => {
 
   })
   it('preenche os campos obrigatórios sem texto e enviar o formulário', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#nomesobrenome').type('Leonardo Oliveira').should('have.value', 'Leonardo Oliveira')
     cy.get('#email').type('leonardoluz@email.com').should('have.value', 'leonardoluz@email.com')
     cy.get('#telefone').type('11945587569').should('have.value', '11945587569')
@@ -167,11 +151,7 @@ describe('Barbearia Alura', () => {
 
   })
   it('preenchendo os campos obrigatórios do formulário',()=>{
-    cy.contains('a','Contato')
-    .should('be.visible')
-    .click()
-    .title()
-    .should('be.equal','Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#nomesobrenome').type('Leonardo Oliveira da Luz',{delay:0}).should('have.value','Leonardo Oliveira da Luz')
     cy.get('#email').type('leonardo@email.com').should('have.value','leonardo@email.com')
     cy.get('#telefone').type('11985859696').should('have.value','11985859696')
@@ -181,11 +161,7 @@ describe('Barbearia Alura', () => {
     cy.get('#nomesobrenome').should('have.value','')
   })
   it('preenchendo os campos obrigatórios do formulário e limpando',()=>{
-    cy.contains('a','Contato')
-    .should('be.visible')
-    .click()
-    .title()
-    .should('be.equal','Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#nomesobrenome').type('Leonardo Oliveira da Luz',{delay:0}).should('have.value','Leonardo Oliveira da Luz').clear().should('have.value', '');
     cy.get('#email').type('leonardo@email.com').should('have.value','leonardo@email.com').clear().should('have.value', '');
     cy.get('#telefone').type('11985859696').should('have.value','11985859696').clear().should('have.value', '');
@@ -194,21 +170,13 @@ describe('Barbearia Alura', () => {
     cy.get('#nomesobrenome').should('have.value','')
   })
   it('preenche a area de texto usando o comando invoke', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#mensagem')// acessando o text-area
       .invoke('val', longText)// usando o invoke para colocar o valor da constante longText
       .should('have.value', longText);// verificando se o texto está com mesmo valor
   })
   it('marcar ambos checkboxes, depois desmarca o último', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('input[type="checkbox"]') // com o cy.get para pegar os elementos do input type checkbox
       .check() // marca o elemento com um check
       .should('be.checked') // verifica se está marcado o elemento
@@ -216,11 +184,7 @@ describe('Barbearia Alura', () => {
       .should('not.be.checked'); // verifica se não está marcado
   })
   it('marcar cada tipo de contato', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('input[type="radio"]') // usando o input para verificar a quantidade de elemento de do type="radio"
       .should('have.length', 3) // verificando e confirmando a quantidade de elementos 
       .each(function ($radio) { // usando a função .each para passar em cada um dos elementos
@@ -229,31 +193,19 @@ describe('Barbearia Alura', () => {
       })
   })
   it('selecionar o perido da manha a ser atendido por seu texto', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#horario')
       .select('manha')
       .should('have.value', 'manha')
   })
   it('selecionar o perido da tarde a ser atendido por seu texto', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#horario')
       .select('tarde')
       .should('have.value', 'tarde')
   })
   it('selecionar o perido da noite a ser atendido por seu texto', () => {
-    cy.contains('a', 'Contato') // visita pagina de contato
-      .should('be.visible')
-      .click()
-      .title()
-      .should('be.equal', 'Contato - Barbearia Alura')
+    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#horario')
       .select('noite')
       .should('have.value', 'noite')

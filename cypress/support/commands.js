@@ -23,3 +23,11 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('acessoAoContato',(tag,conteudo,escrita) => {
+    cy.contains(tag, conteudo) // visita pagina de contato
+    .should('be.visible')
+    .click()
+    .title()
+    .should('be.equal', escrita)
+})
