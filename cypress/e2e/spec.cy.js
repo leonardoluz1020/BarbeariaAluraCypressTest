@@ -180,6 +180,19 @@ describe('Barbearia Alura', () => {
     cy.get('.enviar').click()
     cy.get('#nomesobrenome').should('have.value','')
   })
+  it('preenchendo os campos obrigatórios do formulário e limpando',()=>{
+    cy.contains('a','Contato')
+    .should('be.visible')
+    .click()
+    .title()
+    .should('be.equal','Contato - Barbearia Alura')
+    cy.get('#nomesobrenome').type('Leonardo Oliveira da Luz',{delay:0}).should('have.value','Leonardo Oliveira da Luz').clear().should('have.value', '');
+    cy.get('#email').type('leonardo@email.com').should('have.value','leonardo@email.com').clear().should('have.value', '');
+    cy.get('#telefone').type('11985859696').should('have.value','11985859696').clear().should('have.value', '');
+    cy.get('#mensagem').type(longText,{delay:0}).should('have.value',longText).clear().should('have.value', '');
+    cy.get('.enviar').click()
+    cy.get('#nomesobrenome').should('have.value','')
+  })
   it('preenche a area de texto usando o comando invoke', () => {
     cy.contains('a', 'Contato') // visita pagina de contato
       .should('be.visible')
