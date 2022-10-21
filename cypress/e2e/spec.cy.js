@@ -60,7 +60,7 @@ describe('Barbearia Alura', () => {
       // com request podemos fazer requisição a nivel de rede
       .should(function (response) { // usando o should para fazer verificações junto com uma função de callback que recebe a resposta da requisição, 
         console.log(response);
-        const { status, statusText, isOkStatusCode, body } = response // com a resposta da requisição estamos desestruturando o status
+        const { status, statusText, isOkStatusCode, body } = response // com a resposta da requisição estamos desestruturando os objetos
         expect(status).to.equal(200) // com o expect verifica no status se é igual a 200
         expect(statusText).to.equal('OK')
         expect(isOkStatusCode).to.equal(true)
@@ -150,16 +150,18 @@ describe('Barbearia Alura', () => {
     cy.get('#mensagem').should('be.visible')
 
   })
-  it('preenchendo os campos obrigatórios do formulário',()=>{
-    cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
-    cy.get('#nomesobrenome').type('Leonardo Oliveira da Luz',{delay:0}).should('have.value','Leonardo Oliveira da Luz')
-    cy.get('#email').type('leonardo@email.com').should('have.value','leonardo@email.com')
-    cy.get('#telefone').type('11985859696').should('have.value','11985859696')
-    cy.get('#mensagem').type(longText,{delay:0}).should('have.value',longText)
-    cy.get('#radio-email').check().should('be.checked')
-    cy.get('.enviar').click()
-    cy.get('#nomesobrenome').should('have.value','')
-  })
+  Cypress._.times(4,()=>{
+    it.only('preenchendo os campos obrigatórios do formulário',()=>{
+      cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
+      cy.get('#nomesobrenome').type('Leonardo Oliveira da Luz',{delay:0}).should('have.value','Leonardo Oliveira da Luz')
+      cy.get('#email').type('leonardo@email.com',{delay:0}).should('have.value','leonardo@email.com')
+      cy.get('#telefone').type('11985859696',{delay:0}).should('have.value','11985859696')
+      cy.get('#mensagem').type(longText,{delay:0}).should('have.value',longText)
+      cy.get('#radio-email').check().should('be.checked')
+      cy.get('.enviar').click()
+      cy.get('#nomesobrenome').should('have.value','')
+    })
+  })  
   it('preenchendo os campos obrigatórios do formulário e limpando',()=>{
     cy.acessoAoContato('a','Contato','Contato - Barbearia Alura')
     cy.get('#nomesobrenome').type('Leonardo Oliveira da Luz',{delay:0}).should('have.value','Leonardo Oliveira da Luz').clear().should('have.value', '');
